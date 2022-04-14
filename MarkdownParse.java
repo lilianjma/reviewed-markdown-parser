@@ -16,8 +16,14 @@ public class MarkdownParse {
             int closeBracket = markdown.indexOf("]", openBracket);
             int openParen = markdown.indexOf("(", closeBracket);
             int closeParen = markdown.indexOf(")", openParen);
+            
+            // Malformed construct and trailing whitespace fix
             if(openBracket == -1 || closeBracket == -1 ||
             openParen == -1 || closeParen == -1) break;
+            
+            // Image reference fix
+            if(openBracket > 0 && markdown.charAt(openBracket-1) == '!') 
+                break;
 
             toReturn.add(markdown.substring(openParen + 1, closeParen));
             currentIndex = closeParen + 1;
