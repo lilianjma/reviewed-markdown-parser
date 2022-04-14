@@ -25,7 +25,12 @@ public class MarkdownParse {
             if(openBracket > 0 && markdown.charAt(openBracket-1) == '!') 
                 break;
 
-            toReturn.add(markdown.substring(openParen + 1, closeParen));
+            // URL padding fix
+            String url = markdown.substring(openParen + 1, closeParen);
+            url = url.replaceAll("^\s*", "");
+            url = url.replaceAll("\s*$", "");
+            
+            toReturn.add(url);
             currentIndex = closeParen + 1;
             System.out.println(currentIndex);
         }
