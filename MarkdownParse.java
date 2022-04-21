@@ -32,7 +32,6 @@ public class MarkdownParse {
             
             toReturn.add(url);
             currentIndex = closeParen + 1;
-            System.out.println(currentIndex);
         }
 
         return toReturn;
@@ -40,6 +39,7 @@ public class MarkdownParse {
 
 
     public static void main(String[] args) throws IOException {
+	    System.out.println("MarkdownParse");
         Path fileName = Path.of(args[0]);
         String content = Files.readString(fileName);
         ArrayList<String> links = getLinks(content);
