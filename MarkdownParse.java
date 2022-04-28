@@ -31,8 +31,8 @@ public class MarkdownParse {
 
             // URL padding fix
             String url = markdown.substring(openParen + 1, closeParen);
-            url = url.replaceAll("^\s*", "");
-            url = url.replaceAll("\s*$", "");
+            url = url.replaceAll("^ *", "");
+            url = url.replaceAll(" *$", "");
 
             // Ordering and space between title/url (test-file5.md)
             if(closeBracket != openParen - 1) {
