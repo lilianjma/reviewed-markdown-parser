@@ -8,9 +8,17 @@ import org.junit.*;
 public class MarkdownParseTest {
 
     @Test
-    public void testTestFile() throws Exception {
+    public void testFile1() throws Exception {
         ArrayList<String> links = MarkdownParse.getLinks(Files.readString(Path.of("test-file.md")));
         String[] expected = {"https://something.com", "some-thing.html"};
+
+        assertArrayEquals(links.toArray(), expected);
+    }
+
+    @Test
+    public void testFile5() throws Exception {
+        ArrayList<String> links = MarkdownParse.getLinks(Files.readString(Path.of("test-file5.md")));
+        String[] expected = {};
 
         assertArrayEquals(links.toArray(), expected);
     }
