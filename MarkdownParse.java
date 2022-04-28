@@ -34,6 +34,13 @@ public class MarkdownParse {
             url = url.replaceAll("^ *", "");
             url = url.replaceAll(" *$", "");
 
+            for(char c : url.toCharArray()) {
+                if(c == '\n') {
+                    currentIndex = closeParen + 1;
+                    break;
+                }
+            }
+
             // Ordering and space between title/url (test-file5.md)
             if(closeBracket != openParen - 1) {
                 currentIndex = closeParen + 1;

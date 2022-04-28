@@ -25,7 +25,7 @@ public class MarkdownParseTest {
 
     @Test
     public void testPaddingMultiline() throws Exception {
-        ArrayList<String> links = MarkdownParse.getLinks(Files.readString(Path.of("test-file5.md")));
+        ArrayList<String> links = MarkdownParse.getLinks(Files.readString(Path.of("test-breaking-padding-multiline.md")));
         String[] expected = {"https://something.co.uk"};
 
         assertArrayEquals(expected, links.toArray());
