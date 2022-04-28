@@ -22,4 +22,12 @@ public class MarkdownParseTest {
 
         assertArrayEquals(expected, links.toArray());
     }
+
+    @Test
+    public void testPaddingMultiline() throws Exception {
+        ArrayList<String> links = MarkdownParse.getLinks(Files.readString(Path.of("test-file5.md")));
+        String[] expected = {"https://something.co.uk"};
+
+        assertArrayEquals(expected, links.toArray());
+    }
 }
