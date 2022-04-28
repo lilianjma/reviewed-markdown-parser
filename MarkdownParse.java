@@ -25,13 +25,9 @@ public class MarkdownParse {
             if(openBracket > 0 && markdown.charAt(openBracket-1) == '!') 
                 break;
 
-            // URL padding fix
-            String url = markdown.substring(openParen + 1, closeParen);
-            url = url.replaceAll("^\s*", "");
-            url = url.replaceAll("\s*$", "");
-            
-            toReturn.add(url);
+            toReturn.add(markdown.substring(openParen + 1, closeParen));
             currentIndex = closeParen + 1;
+            System.out.println(currentIndex);
         }
 
         return toReturn;
@@ -39,7 +35,6 @@ public class MarkdownParse {
 
 
     public static void main(String[] args) throws IOException {
-	    System.out.println("MarkdownParse");
         Path fileName = Path.of(args[0]);
         String content = Files.readString(fileName);
         ArrayList<String> links = getLinks(content);

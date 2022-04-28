@@ -6,10 +6,6 @@ import java.util.*;
 import org.junit.*;
 
 public class MarkdownParseTest {
-    @Test
-    public void addition() {
-        assertEquals(2, 1 + 1);
-    }
 
     @Test
     public void testTestFile() throws Exception {
