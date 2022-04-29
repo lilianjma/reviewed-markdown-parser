@@ -20,13 +20,15 @@ public class MarkdownParse {
 
             // Malformed construct and trailing whitespace fix
             if (openBracket == -1 || closeBracket == -1 ||
-                    openParen == -1 || closeParen == -1)
-                break;
+                    openParen == -1 || closeParen == -1) {
+                currentIndex++;
+                continue;
+            }
 
             // Image reference fix
-            if (openBracket > 0 && markdown.charAt(openBracket - 1) == '!'){
+            if (openBracket > 0 && markdown.charAt(openBracket - 1) == '!') {
                 currentIndex = closeParen + 1;
-                break;
+                continue;
             }
 
             // URL padding fix
@@ -34,22 +36,21 @@ public class MarkdownParse {
             url = url.replaceAll("^ *", "");
             url = url.replaceAll(" *$", "");
 
-            for(char c : url.toCharArray()) {
-                if(c == '\n') {
-                    currentIndex = closeParen + 1;
-                    break;
-                }
+            if (url.split("\\n").length > 1) {
+                System.out.println(url.split("\\n").length);
+                currentIndex = closeParen + 1;
+                continue;
             }
 
             // Ordering and space between title/url (test-file5.md)
-            if(closeBracket != openParen - 1) {
+            if (closeBracket != openParen - 1) {
                 currentIndex = closeParen + 1;
-                break;
+                continue;
             }
             toReturn.add(url);
 
             currentIndex = closeParen + 1;
-            System.out.println(currentIndex);
+            // System.out.println(currentIndex);
         }
 
         return toReturn;
