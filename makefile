@@ -18,6 +18,8 @@ test: MarkdownParseTest.class
 clean:
 	rm -rf *.class
 
+build: MarkdownParseTest.class
+
 run: MarkdownParse.class
 	java MarkdownParse $(FILE)
 
