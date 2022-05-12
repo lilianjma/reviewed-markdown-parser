@@ -30,4 +30,20 @@ public class MarkdownParseTest {
 
         assertArrayEquals(expected, links.toArray());
     }
+
+    @Test
+    public void testBackticks() throws Exception {
+        ArrayList<String> links = MarkdownParse.getLinks(Files.readString(Path.of("test-backticks.md")));
+        String[] expected = {"some-thing.html"};
+
+        assertArrayEquals(expected, links.toArray());
+    }
+
+    @Test
+    public void testUrlEscape() throws Exception {
+        ArrayList<String> links = MarkdownParse.getLinks(Files.readString(Path.of("test-url-escape.md")));
+        String[] expected = {};
+
+        assertArrayEquals(expected, links.toArray());
+    }
 }

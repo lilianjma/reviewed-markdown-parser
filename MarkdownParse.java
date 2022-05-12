@@ -6,7 +6,16 @@ import java.util.regex.Pattern;
 
 public class MarkdownParse {
 
+    public static String stripCodeblocks(String markdown) {
+        markdown = markdown.replaceAll("(?s)```.*```", "");
+        markdown = markdown.replaceAll("`.*`", "");
+        return markdown;
+    }
+
     public static ArrayList<String> getLinks(String markdown) {
+        // Strip away codeblocks
+        markdown = stripCodeblocks(markdown);
+        System.out.println(markdown);
         ArrayList<String> toReturn = new ArrayList<>();
         // find the next [, then find the ], then find the (, then read link upto next )
         int currentIndex = 0;
@@ -20,6 +29,12 @@ public class MarkdownParse {
             if (openBracket == -1 || closeBracket == -1 ||
                     openParen == -1 || closeParen == -1) {
                 currentIndex++;
+                continue;
+            }
+
+            // Backslash fix
+            if(openBracket > 0 && markdown.charAt(openBracket - 1) == '\\') {
+                currentIndex = openBracket + 1;
                 continue;
             }
 
