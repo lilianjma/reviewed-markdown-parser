@@ -46,4 +46,13 @@ public class MarkdownParseTest {
 
         assertArrayEquals(expected, links.toArray());
     }
+
+
+    @Test
+    public void testImage() throws Exception {
+        ArrayList<String> links = MarkdownParse.getLinks(Files.readString(Path.of("test-breaking-image.md")));
+        String[] expected = {"https://something.com", "https://something.edu"};
+
+        assertArrayEquals(expected, links.toArray());
+    }
 }
